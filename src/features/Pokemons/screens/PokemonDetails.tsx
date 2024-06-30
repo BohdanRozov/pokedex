@@ -27,12 +27,14 @@ export const PokemonDetails = ({
   }, [data]);
 
   const renderType = useCallback(
-    (item: PokeAPI.PokemonType) => <PokemonType item={item} />,
+    (item: PokeAPI.PokemonType) => (
+      <PokemonType key={item.type.name} item={item} />
+    ),
     []
   );
 
   const renderBodyStat = useCallback(
-    (item: BodyStat) => <PokemonBodyStat item={item} />,
+    (item: BodyStat) => <PokemonBodyStat key={item.key} item={item} />,
     []
   );
 
