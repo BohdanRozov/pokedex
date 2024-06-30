@@ -20,7 +20,7 @@ export const PokemonDetails = ({
   },
 }: RootStackScreenProps<"PokemonDetails">) => {
   const { styles } = useStyles(stylesheet);
-  const { data, isLoading, error } = useGetPokemonByNameQuery(name);
+  const { data, error, isLoading, isError } = useGetPokemonByNameQuery(name);
 
   const details = useMemo(() => {
     return mapPokemonToPokemonDetails(data);
@@ -36,18 +36,20 @@ export const PokemonDetails = ({
     []
   );
 
-  if (isLoading) {
-    <View style={styles.container}>
-      <ActivityIndicator size="large" />
-    </View>;
-  }
-
-  if (!data) {
+  if (isError) {
     return (
       <View style={styles.container}>
         <Typography color="error">
           {error?.toString() || "Something went wrong"}
         </Typography>
+      </View>
+    );
+  }
+
+  if (!data || isLoading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" />
       </View>
     );
   }
@@ -64,7 +66,7 @@ export const PokemonDetails = ({
       >
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <Typography color="white">{capitalizeFirstLetter(name)}</Typography>
-          <Typography color="white">#{data.id}</Typography>
+          <Typography color="white">#{data?.id}</Typography>
         </View>
         <View style={{ alignSelf: "center" }}>
           {details.frontImageUrl ? (
