@@ -13,9 +13,5 @@ export const Screen = ({ children, style }: PropsWithChildren<ScreenProps>) => {
 };
 
 const stylesheet = createStyleSheet((theme) => ({
-  container: {
-    flex: 1,
-    padding: theme.margins.l,
-    backgroundColor: theme.colors.background,
-  },
+  container: { flex: 1, backgroundColor: theme.colors.background },
 }));

@@ -14,6 +14,12 @@ export const pokemonApi = pokeapi.injectEndpoints({
     >({
       query: (params) => ({ url: "pokemon", params }),
     }),
+    getPokemonFormsByName: builder.query<
+      PokeAPI.PokemonForm & { types: PokeAPI.PokemonType[] },
+      string
+    >({
+      query: (name) => `pokemon-form/${name}`,
+    }),
     getPokemonByName: builder.query<PokeAPI.Pokemon, string>({
       query: (name) => `pokemon/${name}`,
     }),
@@ -23,5 +29,6 @@ export const pokemonApi = pokeapi.injectEndpoints({
 export const {
   useGetAllPokemonsQuery,
   useGetPokemonsPaginatedQuery,
+  useGetPokemonFormsByNameQuery,
   useGetPokemonByNameQuery,
 } = pokemonApi;

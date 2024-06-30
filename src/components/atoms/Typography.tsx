@@ -1,7 +1,7 @@
 import { Text, TextProps } from "react-native";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 
-type TypographyProps = { variant?: "b1"; color?: "error" };
+type TypographyProps = { variant?: "b1"; color?: "error" | "white" };
 
 export const Typography = ({
   variant = "b1",
@@ -24,6 +24,7 @@ const stylesheet = createStyleSheet((theme) => ({
       color: {
         default: { color: theme.colors.typography },
         error: { color: theme.colors.error },
+        white: { color: theme.colors.white },
       },
     },
   },
